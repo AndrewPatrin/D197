@@ -1,0 +1,23 @@
+{% extends "user/default.html" %}
+{% load socialaccount %}
+{% load socialaccount %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2> Activate account </h2>
+            <form method="post" action="{% url 'activate' %}">
+                {% csrf_token %}
+                {% bootstrap_field form.email %}
+                {% bootstrap_field form.code %}
+                <br>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Enter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

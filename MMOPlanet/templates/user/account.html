@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+
+{% extends 'default.html' %}
+
+
+{% block title %}
+Personal information
+{% endblock title %}
+
+{% block content %}
+<div class="container">
+
+    <div class="col-lg-6">
+        <br>
+        <h1>Your account</h1>
+        <hr>
+        <p style="text-align: left;"><em><strong>Username:</strong> {{ request.user.username }}</em></p>
+        <p style="text-align: left;"><em><strong>First name:</strong> {{ request.user.first_name }}</em></p>
+        <p style="text-align: left;"><em><strong>Surname:</strong> {{ request.user.last_name }}</em></p>
+        <p style="text-align: left;"><em><strong>Email:</strong> {{ request.user.email }}</em></p>
+        <p style="text-align: left;"><em><strong>Your subscriptions:</strong></em>
+        {% if request.user.category_set.all %}
+            {% for category in request.user.category_set.all %}
+            '{{ category }}'
+            {% endfor %}
+        </p>
+        {% else %}
+        <p style="text-align: left;"><em>You are not subscribed to any of the categories yet.</em></p>
+        {% endif %}
+    </div>
+
+    {% if request.user.post_set %}
+    <h3>Your posts and comments to them from users of portal </h3>
+    <hr>
+    <div class="col-lg-4">
+
+        {% for post in request.user.post_set.all %}
+        <div class="card mb-4">
+
+            <a href="/posts/{{post.slug}}"><img class="card-img-top" src="/posts{{post.image.url}}" /></a>
+
+            <div class="card-body">
+                <div class="small text-muted">{{ post.published_date }}</div>
+                <h2 class="card-title h4">{{ post.title }}</h2>
+                <hr>
+                {% if post.comment_set.all %}
+                    {% for comment in post.comment_set.all %}
+                    <b>Comment from  user "{{ comment.user.username }}" -</b>
+                    <br>
+                    {{comment.comment_text}}
+                    <br>
+                    {% if not comment.accepted %}
+                    <a class="btn btn-success" href="/posts/{{ comment.pk }}/accept/">Accept ✓</a>
+                    {% endif %}
+                    <a class="btn btn-danger"  href="/posts/{{ comment.pk }}/delete/">Delete 🞪</a>
+                    <hr>
+                    <br>
+                    {% endfor %}
+                {% else %}
+                No comments to this post yet
+                {% endif %}
+                <a class="btn btn-primary" href="/posts/{{post.slug}}">Go to post →</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock content%}

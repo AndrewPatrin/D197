@@ -1,0 +1,9 @@
+{% autoescape off %}
+
+Hi {{ user }},
+Thanks for registration!
+One-time code: {{ token }}
+To activate your account click on the link below:
+{{ protocol }}://{{ domain }}/activate/
+and enter your email and received code to activate your account.
+{% endautoescape %}

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Post</title>
+</head>
+<body>
+    <p style="text-align:left;">Hello, {{ user }}!<br>New post in your favorite section!</p>
+    <h1>{{ post.post_title }}</h1>
+    <p style="text-align: left;"><em>{{ post.subtitle }}</em></p>
+    <p style="text-align: left;"><em>Read more -</em> http://127.0.0.1:8000{% url 'post_detail' post.slug  %}</p>
+    <p style="text-align: right;"><em><strong>Author:</strong></em></p>
+    <p style="text-align: right;"><em><strong>{{ post.user.username }}</strong></em></p>
+</body>
+</html>

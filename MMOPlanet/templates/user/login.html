@@ -1,0 +1,34 @@
+{% extends "user/default.html" %}
+{% load socialaccount %}
+{% load socialaccount %}
+{% load bootstrap4 %}
+
+
+{% block notification %}
+{% include 'notification/messaging.html' %}
+{% endblock notification %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8">
+            <h2> Login </h2>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {% bootstrap_field form.username %}
+                {% bootstrap_field form.password %}
+                <br>
+                <div class="form-group">
+                    <button class="btn btn-outline-info" type="submit">Enter</button>
+                </div>
+                 <button class="btn btn-outline-info">
+                    <a href="{% provider_login_url 'google'%}?next=/posts/">
+                        <i class="fab fa-google"></i>
+                        Login with Google
+                    </a>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

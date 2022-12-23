@@ -1,0 +1,15 @@
+<head>
+    <title>Post</title>
+</head>
+<body>
+    <p style="text-align:left;">Hello, {{ user.username }}!<br> {{category}} Weekly Newsletter </p>
+    {% for post in posts %}
+        <h1>{{ post.title }}</h1>
+        <p style="text-align: left;"><em>{{ post.subtitle }}</em></p>
+        <p style="text-align: left;"><em>Read more -</em> http://127.0.0.1:8000{% url 'post_detail' post.slug  %}</p>
+        <p style="text-align: right;"><em><strong>Author:</strong></em></p>
+        <p style="text-align: right;"><em><strong>{{ post.user.username }}</strong></em></p>
+    {% endfor %}
+
+</body>
+</html>

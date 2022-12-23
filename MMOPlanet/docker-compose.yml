@@ -1,0 +1,15 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:13.3
+    environment:
+      POSTGRES_DB: "MMOdb"
+      POSTGRES_USER: "MMOadmin"
+      POSTGRES_PASSWORD: "mmo"
+      PGDATA: "/var/lib/postgresql/data/pgdata"
+    volumes:
+      - .:/var/lib/postgresql/data
+    ports:
+      - "5000:5432"
+volumes:
+  pgdata:
